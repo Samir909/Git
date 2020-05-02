@@ -89,6 +89,12 @@ namespace MusicProject.Controllers
 
         }
 
+        public ActionResult show()
+        {
+        
+        return View();
+        }
+
 
 
 
