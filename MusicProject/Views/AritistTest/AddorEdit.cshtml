@@ -1,0 +1,77 @@
+﻿@model MusicProject.Models.Aritist
+
+@{
+    ViewBag.Title = "AddorEdit";
+     Layout = null; 
+   // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddorEdit</h2>
+
+@using (Html.BeginForm("AddorEdit","AritistTest",FormMethod.Post,new {enctype="multipart/form-data",onSubmit="return jQueryAjaxPost(this);",data_restUrl=Url.Action("AddorEdit","AritistTest",new{id=0})}))//data-restUrl
+{
+    @Html.AntiForgeryToken()
+<div class="row">
+    <div class="form-horizontal">
+        <h4>Aritist</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model=>model.Aritist_Id);
+        @Html.HiddenFor(model=>model.Aritist_Image);
+        
+        
+        
+        
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Aritist_name, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Aritist_name, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Aritist_name, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Aritist_Band, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Aritist_Band, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Aritist_Band, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="submit" class="btn btn-default" />
+                    @if (Model.Aritist_Id !=0)
+                    {
+                        <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddorEdit","AritistTest",new {id=0})',false)"><i class="fa fa-plus"></i>Add New</a>
+                    }
+                    
+
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-md-6">
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Aritist_Image, htmlAttributes: new { @class = "control-label col-md-2" })
+           
+                <div class="col-md-10">
+                    <img src="@Url.Content(Model.Aritist_Image)" style="margin: 10px"height="200" width="200" id="imagePreview"/>
+                    <input type="file" name="ImageFile" accept="image/jpeg,image/png" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))"/>
+                </div>
+            
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

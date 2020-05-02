@@ -1,0 +1,48 @@
+﻿@model MusicProject.Models.Aritist
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEdit", "Aritist", FormMethod.Post,new { enctype="multipart/form-data", onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(Model=>Model.Aritist_Id)
+    @Html.HiddenFor(Model=>Model.Aritist_Image)
+    <div class="form-group">
+        @*@ @Html.LabelFor(Model =>Model.C_Id, new {@class="control-label"})*@
+        @*@Html.EditorFor(Model =>Model.C_Id, new {AllowHtmlAttribute=new {@class="from-control"}} )*@
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Aritist_name, new { @class = "control-label" })
+        @Html.EditorFor(Model => Model.Aritist_name, new { AllowHtmlAttribute = new { @class = "from-control" } })
+        @Html.ValidationMessageFor(Model => Model.Aritist_name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Aritist_Band, new { @class = "control-label" })
+        @Html.EditorFor(Model => Model.Aritist_Band, new { AllowHtmlAttribute = new { @class = "from-control" } })
+        @Html.ValidationMessageFor(Model => Model.Aritist_Band)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.Aritist_Image, new { @class = "control-label" })
+        <img src="@Url.Content(Model.Aritist_Image)" style="margin: 10px" height="200" width="200" id="imagePreviw" />
+
+        <input type="file"name="ImageFile"  accept="image/jpeg,image/png" onchange="ShowImagePreview(this,document.getElementById('imagePreviw'))"/>
+
+    </div>
+
+  
+
+    <div class="form-group">
+        <input type="submit" value="submit" class="btn btn-primary" />
+        <input type="reset" value="reset" class="btn btn-warning" />
+
+    </div>
+
+
+
+
+    @*Aritist Add or Edit view*@
+}

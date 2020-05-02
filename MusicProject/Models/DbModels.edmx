@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MusicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aritist">
+          <Key>
+            <PropertyRef Name="Aritist_Id" />
+          </Key>
+          <Property Name="Aritist_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Aritist_name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Aritist_Band" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Aritist_Image" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Category_tbl">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="C_Name" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="bit" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityContainer Name="MusicModelStoreContainer">
+          <EntitySet Name="Aritist" EntityType="Self.Aritist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_tbl" EntityType="Self.Category_tbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category_tbl">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_Name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DbModels" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category_tbl" EntityType="Self.Category_tbl" />
+          <EntitySet Name="Aritists" EntityType="MusicModel.Aritist" />
+          <EntitySet Name="Users" EntityType="MusicModel.User" />
+          </EntityContainer>
+        <EntityType Name="Aritist">
+          <Key>
+            <PropertyRef Name="Aritist_Id" />
+          </Key>
+          <Property Name="Aritist_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aritist_name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Aritist_Band" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Aritist_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmailVerified" Type="Boolean" />
+          <Property Name="ActivationCode" Type="Guid" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicModelStoreContainer" CdmEntityContainer="DbModels">
+          <EntitySetMapping Name="Category_tbl">
+            <EntityTypeMapping TypeName="MusicModel.Category_tbl">
+              <MappingFragment StoreEntitySet="Category_tbl">
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+                <ScalarProperty Name="C_Name" ColumnName="C_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aritists">
+            <EntityTypeMapping TypeName="MusicModel.Aritist">
+              <MappingFragment StoreEntitySet="Aritist">
+                <ScalarProperty Name="Aritist_Image" ColumnName="Aritist_Image" />
+                <ScalarProperty Name="Aritist_Band" ColumnName="Aritist_Band" />
+                <ScalarProperty Name="Aritist_name" ColumnName="Aritist_name" />
+                <ScalarProperty Name="Aritist_Id" ColumnName="Aritist_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MusicModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

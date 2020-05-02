@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MusicProject.Models.Aritist>
+
+@{
+    ViewBag.Title = "ViewAll";
+    Layout = null;
+}
+
+<h2>ViewAll</h2>
+
+
+<table class="table table-striped table-condensed" id="aritistTestTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Aritist_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aritist_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aritist_Band)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Aritist_Image)
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aritist_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aritist_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aritist_Band)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Aritist_Image)
+                    </td>*@
+                <td>
+                    <a class="btn btn-primary btn-sm" onclick="Edit('@Url.Action("AddorEdit", "AritistTest", new {id = @item.Aritist_Id})')"><i class="fa fa-pencil fa-lg"></i></a>
+                    <a class="btn btn-danger btn-sm" onclick="Delete('@Url.Action("Delete", "AritistTest", new {id = @item.Aritist_Id})')"><i class="fa fa-trash fa-lg"></i></a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Category";
+}
+
+<h2>Category Operation</h2>
+
+<a class="btn btn-success " style="margin-bottom: 10px" onclick="PopupForm('@Url.Action("AddOrEdit","Category")')"><i class="fa fa-plus"></i>Add New</a>
+
+<table id="categoryTable" class="table table-striped table-bordered" style="width: 100%">
+
+    <thead>
+
+        <tr>
+
+            <th>ID</th>
+            <th>Category Name</th>
+            <th></th>
+
+        </tr>
+
+    </thead>
+
+</table>
+
+@*<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+@section scriptss
+{
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function() {
+            dataTable = $("#categoryTable").DataTable({
+                "ajax": {
+                    "url": "/Category/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+
+
+                },
+                "columns": [
+                    { "data": "C_Id" },
+                    { "data": "C_Name" },
+                    {
+                        "data": "C_Id", "render": function(data) { // data=category Id
+                            return "<a Class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("AddOrEdit","Category")/"+data+"')><i class='fa fa-pencil'></i>Edit</a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+data+")><i class='fa fa-trash'></i>  Delete</a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"150px"
+                    }
+                ],
+                "language":
+                {
+                    "emptyTable": "no Data found, Please click on <b> Add New</b> Button"
+                }
+
+
+            });
+        });
+
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function(response) {
+                    formDiv.html(response);
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Fill Category',
+                        height: 500,
+                        width: 700,
+                        close: function() {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+        }
+
+        function SubmitForm(form) {
+
+            $.validator.unobtrusive.parse(form);
+
+            if ($(form).valid()) {
+
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function(data) {
+                        if (data.success) {
+                            Popup.dialog('close');
+                            dataTable.ajax.reload();
+                            $.notify(data.message,
+                                {
+                                    globalPosition: "top center",
+                                    className: "success"
+
+
+                                });
+
+
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+        function Delete(id)
+        {
+            if (confirm('Are You Sure to Delete this Category  ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete","Category")/' + id,
+                    success: function(data) {
+                        if (data.success) {
+                            dataTable.ajax.reload();
+                            $.notify(data.message,
+                                {
+                                    globalPosition: "top center",
+                                    className: "success"
+
+
+                                });
+
+
+                        }
+                    }
+                });
+            }
+            
+        }
+
+
+
+
+
+    </script>
+
+}

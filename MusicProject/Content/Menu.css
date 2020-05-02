@@ -1,0 +1,15 @@
+﻿.subMenu1 > ul > li {
+    display: none;
+}
+
+.subMenu1>ul>li:hover
+{
+    width:150px;
+    padding:10px;
+    border-bottom:1px dotted #fff;
+    background: transparent;
+    border-radius:0;
+    text-align:left;
+
+
+}

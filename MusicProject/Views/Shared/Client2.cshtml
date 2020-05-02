@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    @RenderSection("head", required: false)
+
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>One Sound</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/Content/img/core-img/favicon.ico" />
+
+    <!-- Stylesheet -->
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <link href="~/Content/Menu.css" rel="stylesheet" />
+
+    <style>
+        .browse-by-catagories .a {
+            display: inline-block;
+            background-color: #f4f4f4;
+            border: 2px solid transparent;
+            padding: 6px 9px;
+            font-size: 15px;
+            margin-right: 12px;
+        }
+
+        .a, .a:hover, .a:focus {
+            transition-duration: 500ms;
+            text-decoration: none;
+            outline: 0 solid transparent;
+            color: #000000;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: "Archivo Narrow", sans-serif;
+        }
+
+        .browse-by-catagories .a:hover {
+            border: 2px solid #000000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+
+                        <!-- Nav brand -->
+                        <a href="" class="nav-brand"><img src="~/Content/img/core-img/logo.png" /></a>
+
+
+
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li>@Html.ActionLink("Home", "Index", "Client")</li>
+                                   
+                                    <li>
+                                        @Html.ActionLink("Login", "", "")
+
+                                    <div class="subMenu">
+                                        <ul>
+                                            <li>@Html.ActionLink("Admin", "LogIn", "LogIn")</li>
+                                            <li>@Html.ActionLink("User", "Login", "User")</li>
+                                        </ul>
+                                    </div>
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <!-- Nav End -->
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(../../Content/img/bg-img/breadcumb.jpg);">
+    <div class="bradcumbContent">
+        <h2>Albums</h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+<!-- ##### Album Catagory Area Start ##### -->
+<section class="album-catagory section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @using (Html.BeginForm("ValuePass", "ClientHome"))
+                {
+                    <div class="browse-by-catagories catagory-menu d-flex flex-wrap align-items-center mb-70">
+                        @*<a href="#" data-filter="*">Browse All</a>
+                            <a href="#" data-filter=".a" class="active">A</a>
+                            <a href="#" data-filter=".b">B</a>
+                            <a href="#" data-filter=".c">C</a>
+                            <a href="#" data-filter=".d">D</a>
+                            <a href="#" data-filter=".e">E</a>
+                            <a href="#" data-filter=".f">F</a>
+                            <a href="#" data-filter=".g">G</a>
+                            <a href="#" data-filter=".h">H</a>
+                            <a href="#" data-filter=".i">I</a>
+                            <a href="#" data-filter=".j">J</a>
+                            <a href="#" data-filter=".k">K</a>
+                            <a href="#" data-filter=".l">L</a>
+                            <a href="#" data-filter=".m">M</a>
+                            <a href="#" data-filter=".n">N</a>
+                            <a href="#" data-filter=".o">O</a>
+                            <a href="#" data-filter=".p">P</a>
+                            <a href="#" data-filter=".q">Q</a>
+                            <a href="#" data-filter=".r">R</a>
+                            <a href="#" data-filter=".s">S</a>
+                            <a href="#" data-filter=".t">T</a>
+                            <a href="#" data-filter=".u">U</a>
+                            <a href="#" data-filter=".v">V</a>
+                            <a href="#" data-filter=".w">W</a>
+                            <a href="#" data-filter=".x">X</a>
+                            <a href="#" data-filter=".y" >Y</a>
+                            <a href="#" data-filter=".z">Z</a>
+                            <a href="#" data-filter=".number">0-9</a>*@
+                        <button class="a" name="a" value="a">A</button>
+                        <button class="a" name="a" value="b">B</button>
+                        <button class="a" name="a" value="c">C</button>
+                        <button class="a" name="a" value="d">D</button>
+                        <button class="a" name="a" value="e">E</button>
+                        <button class="a" name="a" value="f">F</button>
+                        <button class="a" name="a" value="g">G</button>
+                        <button class="a" name="a" value="h">H</button>
+                        <button class="a" name="a" value="i">I</button>
+                        <button class="a" name="a" value="j">J</button>
+                        <button class="a" name="a" value="k">K</button>
+                        <button class="a" name="a" value="l">L</button>
+                        <button class="a" name="a" value="m">M</button>
+                        <button class="a" name="a" value="n">N</button>
+                        <button class="a" name="a" value="o">O</button>
+                        <button class="a" name="a" value="p">P</button>
+                        <button class="a" name="a" value="q">Q</button>
+                        <button class="a" name="a" value="r">R</button>
+                        <button class="a" name="a" value="s">S</button>
+                        <button class="a" name="a" value="t">T</button>
+                        <button class="a" name="a" value="u">U</button>
+                        <button class="a" name="a" value="v">V</button>
+                        <button class="a" name="a" value="w">W</button>
+                        <button class="a" name="a" value="x">X</button>
+                        <button class="a" name="a" value="y">Y</button>
+                        <button class="a" name="a" value="z">Z</button>
+
+
+                    </div>
+                }
+            </div>
+        </div>
+
+
+        @*//rendersection*@
+
+
+
+
+
+
+
+    </div>
+</section>
+<!-- ##### Album Catagory Area End ##### -->
+<!-- ##### Song Area Start ##### -->
+<!-- ##### Song Area End ##### -->
+<!-- ##### Footer Area Start ##### -->
+<div>
+    <div>
+
+        @RenderBody()
+
+    </div>
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <p class="copywrite-text">All rights reserved by <a href="#" target="_blank">Samir</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- ##### Footer Area Start ##### -->
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+@*Popper js*@
+<script src="js/bootstrap/popper.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Content/js/jquery/jquery-2.2.4.min.js"></script>
+
+@*Bootstrap js*@
+<script src="~/Content/js/bootstrap/bootstrap.min.js"></script>
+<script src="~/Content/js/bootstrap/popper.min.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+@*All Plugins js*@
+<script src="js/plugins/plugins.js"></script>
+@*Active js*@
+<script src="js/active.js"></script>
+<script src="~/Content/js/plugins/plugins.js"></script>
+<script src="~/Content/js/active.js"></script>
+
+
+
+
+</body>
+</html>

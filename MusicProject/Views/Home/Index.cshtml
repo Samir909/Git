@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+    <div class="jumbotron">
+        <h1>Admin Panel</h1>
+
+        @*<h1>Response.Write("Wellcome" + Session["A_UserName"]);</h1>*@
+        @if (Session["A_UserName"] != null)
+        {
+            @*<h2> welcome + Session["A_UserName"] </h2>*@
+             Response.Write(Session["A_UserName"]);
+            @Html.DisplayText(Session["A_UserName"].ToString())
+
+
+        }
+
+    </div>
+

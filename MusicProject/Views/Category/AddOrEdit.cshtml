@@ -1,0 +1,31 @@
+﻿@model MusicProject.Models.Category_tbl
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEdit", "Category", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(Model => Model.C_Id)
+    <div class="form-group">
+        @*@ @Html.LabelFor(Model =>Model.C_Id, new {@class="control-label"})*@
+        @*@Html.EditorFor(Model =>Model.C_Id, new {AllowHtmlAttribute=new {@class="from-control"}} )*@
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.C_Name, new { @class = "control-label" })
+        @Html.EditorFor(Model => Model.C_Name, new { AllowHtmlAttribute = new { @class = "from-control" } })
+        @Html.ValidationMessageFor(Model => Model.C_Name)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="submit" class="btn btn-primary" />
+        <input type="reset" value="reset" class="btn btn-warning" />
+
+    </div>
+
+
+
+
+    @*Category Add or Edit view*@
+}
